@@ -1,0 +1,44 @@
+<h2>This is Listing No:<%= @listing.id%></h2>
+
+
+<h2>Details :</h2>
+
+
+<p>name : <%= @listing.name%></p>
+<p>description : <%= @listing.description%></p>
+<p>guest number: <%= @listing.guest_number%></p>
+<p>room number: <%= @listing.room_number%></p>
+<p>bath number: <%= @listing.bath_number%></p>
+<p>price : <%= @listing.price_per_night%></p>
+<p>country: <%= @listing.country%></p>
+<p>state: <%= @listing.state%></p>
+<p>city: <%= @listing.city%></p>
+<p>zipcode: <%= @listing.zipcode%></p>
+<p>address: <%= @listing.address%></p>
+<br>
+<% @listing.image.each do |x|%>
+<%= image_tag x.url %>
+<%end%> 
+<br>
+<p>Listing hosted by:  <%= @listing.user.first_name%>   <%= @listing.user.last_name%></p>
+<p>email:  <%= @listing.user.email%></p>
+<br>
+<!-- ada dua cara untuk ke link yang sama -->
+<p><a href ='<%= @listing.id%>/edit'>Edit Listings</a></p>
+
+<%= link_to 'Edit Listings', edit_listing_path(@listing) %>
+<br>
+
+
+Listing Status:  <%= @listing.verified%>
+<br>
+
+ <% if current_user.moderator? %>
+	 <% if !@listing.verified %>
+	 <%= link_to 'verify this listing', verify_path(@listing), method: :patch %>
+	 <% else %>
+	 <%= link_to 'unverify', verify_path(@listing), method: :patch %>
+ 	<% end%> 
+ <% end %>
+
+ <p><%= link_to 'Make a reservation on this listing!!', new_listing_reservation_path(@listing) %></p>

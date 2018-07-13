@@ -15,8 +15,23 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
+gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
+#picture uploader
+gem 'carrierwave-aws'
+gem 'mini_magick'
+gem 'aws-sdk-rails'
+gem 'carrierwave', '~> 1.0'
+gem "rmagick"
+# payment gateway
+gem 'braintree'
 # figaro
 gem "figaro"
+# sidekiq
+gem 'sidekiq'
+# mailer
+gem "letter_opener", :group => :development
+# pagination
+gem 'kaminari'
 # clearance
 gem "clearance"
 # google omniouth

@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
+  get 'braintree/new'
   resources :passwords, controller: "clearance/passwords", only: [:create, :new]
   resource :session, controller: "clearance/sessions", only: [:create]
+  resources :listings, controller: "listings" do
+    resources :reservations, only: [:index, :create, :new]
+  end
+  resources :reservations, only: [:show]
 
   resources :users, controller: "users", only: [:create, :edit] do
     resource :password,
@@ -13,7 +18,9 @@ Rails.application.routes.draw do
   get "/sign_up" => "clearance/users#new", as: "sign_up"
 
   get 'users/:id', to: 'users#show'
- 
+  patch 'users/:id' => 'users#update', as:'update_user'
+
+ get 'listings/:id', to: 'listings#show'
   
   
   root 'welcome#index'
@@ -26,5 +33,9 @@ Rails.application.routes.draw do
   post 'posts', to: 'posts#create'
 
   get "/auth/:provider/callback" => "sessions#create_from_omniauth"
+
+  patch 'listings/:id/verify' => 'listings#verify', as:'verify'
+
+  post 'braintree/checkout'
 
 end
