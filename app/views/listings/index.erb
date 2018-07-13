@@ -1,0 +1,17 @@
+<table>
+ <thead>
+ <tr>
+ <th>Title</th>
+ <th>Description</th>
+ </tr>
+ </thead>
+ <tbody>
+ <% @listing.each do |listing| %>
+ <tr>
+ <td><%=listing.name %></td>
+ <td><%=listing.description %></td>
+ </tr>
+ <% end %>
+ </tbody>
+</table>
+<%= paginate @listing %>

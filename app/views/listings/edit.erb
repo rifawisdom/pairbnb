@@ -1,0 +1,20 @@
+<h2>This is Listing No:<%= @listing.id%></h2>
+
+
+<h2>you can edit here</h2>
+
+<%= form_for @listing do |f| %>
+
+	<%= f.label :name%><br>
+	<%= f.text_field :name %>
+
+<p><%= f.submit %></p>
+<%end%>
+
+
+
+<%= form_for @listing, html: {multipart: true} do |f| %>
+  <%= f.label :image, "Choose Image" %>
+  <%= f.file_field :image, multiple:true %>
+  <p><%= f.submit %></p>
+<% end %>

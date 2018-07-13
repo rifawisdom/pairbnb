@@ -7,22 +7,36 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
   </head>
 
   <body>
 
 
-       <% if signed_in? %>
-       <p>You are signed in as: <%= current_user.email %></p>
-       <%= button_to "Sign out", sign_out_path, method: :delete %>
-       <%= button_to "Home", root_path, method: :get%>
-    
-      <% else %>
+    <% if signed_in? %>
+      <p>You are signed in as:<a href ='/users/<%= current_user.id%>/edit'> <%= current_user.email %></a></p>
+      <%= button_to "Sign out", sign_out_path, method: :delete %>
+      <%= button_to "Home", root_path, method: :get%>
+    <% else %>
       <%= link_to "Sign in", sign_in_path %>
       <%= link_to "Sign in with Google", "/auth/google_oauth2" %>
-      <% end %>
+    <% end %>
 
+    <div id="flash">
+      <% flash.each do |key, value| %>
+      <div class="alert alert-info" id="flash_ <%= key %>"><%= value %></div>
+        <% end %>
+    </div>
 
     <%= yield %>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
   </body>
 </html>
+
+

@@ -1,16 +1,24 @@
 class UsersController < Clearance::UsersController
-	 
+
+	
 	  def show
 	  end
 
 	  def edit
+	  	@user= User.find(params[:id])
+
 	  end
 
 	  def update
+	  	
+	    u = current_user
+		u.avatar = params[:user][:avatar] 
+		
+		u.save
 	  end
 
 	  def user_params
-	  	params.require(:user).permit(:email, :password, :first_name, :last_name)
+	  params.require(:user).permit(:email, :password, :first_name, :last_name, :avatar)
 	  end
 
 
