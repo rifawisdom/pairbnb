@@ -4,6 +4,6 @@ class Listing < ApplicationRecord
 	has_many :reservations
   
  
-  
+  scope :check_title, ->(search_title){ where("name ILIKE ?", "%#{search_title}%")}
 	
 end

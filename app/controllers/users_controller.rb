@@ -17,10 +17,6 @@ class UsersController < Clearance::UsersController
 		u.save
 	  end
 
-	  def user_params
-	  params.require(:user).permit(:email, :password, :first_name, :last_name, :avatar)
-	  end
-
 
 
 	def create
@@ -48,7 +44,8 @@ class UsersController < Clearance::UsersController
 	  #     user.last_name = last_name
 	  #   end
   	# end
-
-
-
+	private
+	def user_params
+		params.require(:user).permit(:email, :password, :first_name, :last_name, :avatar)
+	end
 end
