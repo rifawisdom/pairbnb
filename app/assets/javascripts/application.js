@@ -15,8 +15,6 @@
 //= require turbolinks
 //= require_tree .
 
-
-
 document.addEventListener("DOMContentLoaded", function(event){
 	$('#check_title').on('keypress', function(e){
 		 $.ajax({
@@ -37,8 +35,7 @@ document.addEventListener("DOMContentLoaded", function(event){
 		         titles.append(option);
 		       })
 		     }
-   		})
-	  
+   		})	  
 	 });
 });
 
