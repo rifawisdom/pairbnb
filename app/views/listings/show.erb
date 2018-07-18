@@ -24,7 +24,7 @@
 <p>email:  <%= @listing.user.email%></p>
 <br>
 <!-- ada dua cara untuk ke link yang sama -->
-<p><a href ='<%= @listing.id%>/edit'>Edit Listings</a></p>
+<!-- <p><a href ='<%= @listing.id%>/edit'>Edit Listings</a></p> -->
 
 <%= link_to 'Edit Listings', edit_listing_path(@listing) %>
 <br>
