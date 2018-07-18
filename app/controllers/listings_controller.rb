@@ -57,7 +57,31 @@ class ListingsController < ApplicationController
 		
 	end
 
+	def search
+		
+		# below is rails kind of search
+		# @listing = Listing.all
+		# @listing = @listing.check_title(params["check_title"])
+
+		# below is ajax kind of search and work for both
+		 @listing = Listing.all
+		 filter_params(params).each do |key, value|
+		 	@listing = @listing.public_send(key,value) if value.present?
+		 end
+
+		 respond_to do |format|
+		 	format.html
+		 	format.json{render json: @listing}
+		 end
+
+
+	end
+
 	private
+		def filter_params(params)
+			params.slice(:check_title)
+		end
+
 	  def listing_params
 	  	params.require(:listing).permit(:name, :property_type, :description, :guest_number, :room_number, :bath_number, :price_per_night, :country, :state, :city, :zipcode, :address, :user_id, {image: []})
 	  	

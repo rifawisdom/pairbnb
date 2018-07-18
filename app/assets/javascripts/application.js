@@ -14,3 +14,31 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+
+
+
+document.addEventListener("DOMContentLoaded", function(event){
+	$('#check_title').on('keypress', function(e){
+		 $.ajax({
+		     url: 'search',
+		     method: 'GET',
+		     data: $(this).serialize(),
+		     dataType: 'json',
+		     success: function(data){
+		     	// console.log('pass')
+		       let titles = document.getElementById("property_name");
+		       // console.log()
+		     
+		       titles.innerHTML = "";   
+
+		       data.forEach(function(listing){
+		         const option = document.createElement("option");   
+		         option.value = listing.name;
+		         titles.append(option);
+		       })
+		     }
+   		})
+	  
+	 });
+});
+

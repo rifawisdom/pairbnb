@@ -1,0 +1,19 @@
+<%= form_tag search_path, method: :get do %>
+ <%= label_tag "Property Name" %>
+ <%= text_field_tag :check_title %>
+ <%= submit_tag "Search" %>
+
+<% end %> 
+
+<% @listing.each do |listing| %>  
+    
+ 
+     <p>Name: <a href= 'listings/<%= listing.id %>'><%= listing.name%> </a>
+     <p>City: <%= listing.city %></p>
+     <p>Property type: <%= listing.property_type %></p>
+     <p>Number of guest: <%= listing.guest_number %></p>
+     <p>Price: <%= listing.price_per_night %></p>
+     <hr>
+     <% end %>
+
+

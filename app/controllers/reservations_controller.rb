@@ -21,7 +21,7 @@ class ReservationsController < ApplicationController
 			# ReservationMailer.reservation_email(current_user, @listing.user_id, reservation.id).deliver_later
 			ReservationJob.perform_later(current_user, @listing.user_id, reservation.id)
 			# ReservationMailer.reservation_email(current_user, @listing.user_id, reservation.id).deliver_later
-			redirect_to root_path
+			redirect_to reservation_path(reservation.id)
 			
 		else
 			flash[:alert]= "#{reservation.errors.full_messages[0]}"

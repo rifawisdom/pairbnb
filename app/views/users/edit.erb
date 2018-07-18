@@ -2,11 +2,12 @@
 
 This is user email:<%= current_user.email%><br>
 <%= image_tag @user.avatar.url(:thumb) %>
+
 <br>
 
 <p>Edit your profile below</p>
 
-<%= form_with  url: update_user_path(current_user), method: :patch do |f| %>
+<%= form_with scope: :user,url: update_user_path(current_user), method: :patch do |f| %>
 
 	<%= f.label :avatar%><br>
 	<%= f.file_field :avatar %>

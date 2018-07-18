@@ -21,7 +21,9 @@ Rails.application.routes.draw do
   patch 'users/:id' => 'users#update', as:'update_user'
 
  get 'listings/:id', to: 'listings#show'
-  
+
+
+   get "/search" => "listings#search", as: "search"
   
   root 'welcome#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
