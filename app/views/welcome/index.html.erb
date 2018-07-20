@@ -18,20 +18,46 @@
 <p><a href ='listings#index'>All Listings</a></p>
 
 
-<%Listing.all.each do |y|%>
 
-<li>Name :<a href= 'listings/<%= y.id %>'><%= y.name%> </a></li>
-<li>Description :<%= y.description %> </li>
-<li>Property Type :<%= y.property_type%> </li>
-<li>Price: <%= y.price_per_night %> </li>
-<li>Listing By: <%= y.user.first_name %> </li>
-<%= link_to 'Show', edit_listing_path(y) %> |
-<%= link_to 'Edit', edit_listing_path(y) %> |
-<%= link_to 'Delete', edit_listing_path(y) %>
-<br>
-<br>	
+<hr>
 
-<%end%>
 
+
+
+<%@listing = Listing.page(params[:page]).per(10)%>
+ <div class="row">  
+    <% @listing.order(updated_at: :desc).each do |listing| %>
+      <div class="col-4 mb-4 my-4">
+        <div class="card" style="width: 18rem;">
+          <% if listing.image != [] %>
+          <img class="card-img-top" src="<%= listing.image[0] %>" 
+          alt="Card image cap">
+    <% end %>
+
+           <ul class="list-group list-group-flush">
+              <li class="list-group-item card-text"><strong><%= listing.name %></strong></li>
+              <li class="list-group-item card-text">City: <%= listing.city %></li>
+              <li class="list-group-item card-text">Property type: <%= listing.property_type %></li>
+              <li class="list-group-item card-text">Number of rooms: <%= listing.room_number %></li>
+              <li class="list-group-item card-text">Number of bathrooms: <%= listing.bath_number %></li>
+              <li class="list-group-item card-text">Price in RM: <%= listing.price_per_night %></li>
+            </ul>
+
+
+            <div class="card-body">
+              <a href="#" class="card-link"><%= link_to 'Show', listing_path(listing) %></a> | 
+              <a href="#" class="card-link"><%= link_to 'Edit', edit_listing_path(listing) %></a> | 
+              <a href="#" class="card-link"><%= link_to 'Delete', listing_path(listing), 
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %></a> |
+              <a href="#" class="card-link"><%= link_to 'Book now', new_listing_reservation_path(listing), data: 
+              { turbolinks: false } %></a> 
+            </div>
+          </div>
+        </div>
+       <% end %>
+  </div>
+
+  <%= paginate @listing %>
 
 
