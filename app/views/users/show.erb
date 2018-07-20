@@ -1,0 +1,14 @@
+
+
+<h2>This is  <%= @user.first_name%> <%= @user.last_name%> profile page</h2>
+
+
+Your email:<%= @user.email%><br>
+
+
+<% if @user.avatar.url != nil %>
+<%= image_tag @user.avatar.url(:thumb) %>
+<%end%>
+<br>
+
+ <%= link_to "Edit Profile", edit_user_path(@user) %>

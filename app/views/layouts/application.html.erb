@@ -17,22 +17,49 @@
   </head>
 
   <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+   <div class="container">
+     <!-- <a class=“navbar-brand” href=“#”>Airbnb</a> -->
+     <%= link_to "AirBnB", root_path, :class => "lead airbnb mr-2" %>
+     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+       <span class="navbar-toggler-icon"></span>
+     </button>
+   
+     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+       <ul class="navbar-nav mr-auto">
+         <!-- Put something here if needed -->
+         <form action="/search" method="GET">
+          <input class="form-control mr-sm-2" type="text" placeholder="Search for City" aria-label="Search" name= "city">
+         </form>
+       </ul>
+       <ul class="nav navbar-nav navbar-right">
+       <% if signed_in? %>
+         <li class="nav-item">
+           <p class="nav-link mb-0">You’re signed in as <a href ='/users/<%= current_user.id%>/edit'><%= current_user.email %></a></p>
+         </li>
+         <li class="nav-item">
+           <%= link_to "Welcome back, "+ current_user.first_name + "" + current_user.last_name, users_path(current_user), :class => "nav-link" %>
+         </li>
+         <li class="nav-item">
+           <%= link_to 'Logout', sign_out_path, method: :delete, :class => 'nav-link' %>
+         </li>
+       <% else %>
+         <li class=“nav-item”>
+           <%= link_to 'Sign in with Google', "/auth/google_oauth2", :class =>'nav-link' %>
+         </li>
+         <li class=“nav-item”>
+           <%= link_to 'Sign Up', sign_up_path, :class => 'nav-link' %>
+         </li>
+         <li class="nav-item">
+           <%= link_to 'Login', sign_in_path, :class => 'nav-link' %>
+         </li>
+       <% end %>
+       </ul>
+     </div>
+   </div>
+ </nav>
 
-
-    <% if signed_in? %>
-      <p>You are signed in as:<a href ='/users/<%= current_user.id%>/edit'> <%= current_user.email %></a></p>
-      <%= button_to "Sign out", sign_out_path, method: :delete %>
-      <%= button_to "Home", root_path, method: :get%>
-    <% else %>
-      <%= link_to "Sign in", sign_in_path %>
-      <%= link_to "Sign in with Google", "/auth/google_oauth2" %>
-    <% end %>
-
-    <div id="flash">
-      <% flash.each do |key, value| %>
-      <div class="alert alert-info" id="flash_ <%= key %>"><%= value %></div>
-        <% end %>
-    </div>
+ 
 
     <%= yield %>
 
@@ -42,5 +69,7 @@
     
   </body>
 </html>
+
+
 
 

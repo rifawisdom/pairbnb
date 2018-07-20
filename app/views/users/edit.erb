@@ -1,16 +1,19 @@
-<h2> This is your profile page</h2>
+<h2> You can edit your profile here</h2>
 
-This is user email:<%= current_user.email%><br>
-<%= image_tag @user.avatar.url(:thumb) %>
+<%if current_user==@user%>
+	This is user email:<%= current_user.email%><br>
+	<% if @user.avatar.url != nil %>
+	<%= image_tag @user.avatar.url(:thumb) %>
+	<%end%>
+	<br>
 
-<br>
+	<p>Edit your profile below</p>
 
-<p>Edit your profile below</p>
+	<%= form_with scope: :user,url: update_user_path(current_user), method: :patch do |f| %>
 
-<%= form_with scope: :user,url: update_user_path(current_user), method: :patch do |f| %>
+		<%= f.label :Picture%><br>
+		<%= f.file_field :avatar %>
 
-	<%= f.label :avatar%><br>
-	<%= f.file_field :avatar %>
-
-<p><%= f.submit %></p>
+	<p><%= f.submit %></p>
+	<%end%>
 <%end%>

@@ -6,6 +6,8 @@ class ListingsController < ApplicationController
 
 	def index
  		@listing = Listing.page(params[:page]).per(10)
+
+ 		render "welcome/index.html.erb"
 	end
 
 	def create
@@ -75,6 +77,13 @@ class ListingsController < ApplicationController
 		 end
 
 
+	end
+
+	def destroy
+		listing = Listing.find(params[:id])
+		listing.destroy
+
+		redirect_to listings_path
 	end
 
 	private
